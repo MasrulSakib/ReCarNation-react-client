@@ -1,0 +1,20 @@
+.img-gradient {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    /* Ensure the gradient follows the border radius */
+}
+
+.img-gradient:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #151515 0%, rgba(21, 21, 21, 0) 100%);
+    background: -webkit-linear-gradient(linear, #151515 0%, rgba(21, 21, 21, 0) 100%);
+    background: -moz-linear-gradient(top, #151515 0%, rgba(21, 21, 21, 0) 100%);
+    pointer-events: none;
+    z-index: 1;
+}

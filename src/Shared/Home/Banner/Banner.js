@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 import { RxDotFilled } from 'react-icons/rx';
+import './Banner.css'
+import { Link } from 'react-router-dom';
 
 
 
@@ -43,31 +45,47 @@ const Banner = () => {
     };
 
     return (
-        <div className='min-w-screen md:h-[1000px] h-[380px] w-full relative pb-16 group'>
-            <div
-                style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-                className='w-full h-full bg-center bg-cover duration-500'
-            ></div>
-            {/* Left Arrow */}
-            <div className='hidden group-hover:block absolute md:top-[50%] top-[40%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
-                <BsChevronCompactLeft onClick={prevSlide} size={30} />
+        <section>
+            <div className='min-w-screen md:h-[1000px] h-[380px] w-full relative pb-16 group'>
+                <div
+                    className='w-full h-full bg-center bg-cover duration-500 img-gradient'
+                    style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
+                ></div>
+                <div className="absolute flex justify-start transform -translate-y-1/2 left-24 top-1/4 z-20">
+                    <h2 className=' text-6xl text-white font-semibold md:text-left text-center'>
+                        Drive Your Dream <br />
+                        for Less with <br />
+                        <Link >
+                            <button className="btn btn-error btn-outline btn-lg font-semibold text-4xl rounded-none mt-5">ReCarNation</button>
+                        </Link>
+                    </h2>
+
+                </div>
+                <div className="absolute flex justify-start transform -translate-y-1/2 left-24 top-2/4 w-1/2 md:text-left text-center z-20">
+                    <p className='text-lg text-white'>Unlock incredible deals on top-quality pre-owned cars. At ReCarNation, we transform the car buying and selling experience with unmatched value, trust, and convenience. Discover your next ride today and join the revolution of smart car ownership!</p>
+
+                </div>
+                {/* Left Arrow */}
+                <div className='z-20 hidden group-hover:block absolute md:top-[50%] top-[40%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-error hover:bg-slate-200 text-white hover:text-error cursor-pointer'>
+                    <BsChevronCompactLeft onClick={prevSlide} size={30} />
+                </div>
+                {/* Right Arrow */}
+                <div className='z-20 hidden group-hover:block absolute md:top-[50%] top-[40%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-error hover:bg-slate-200 text-white hover:text-error cursor-pointer'>
+                    <BsChevronCompactRight onClick={nextSlide} size={30} />
+                </div>
+                <div className='flex top-4 justify-center py-2'>
+                    {slides.map((slide, slideIndex) => (
+                        <div
+                            key={slideIndex}
+                            onClick={() => goToSlide(slideIndex)}
+                            className='text-2xl cursor-pointer'
+                        >
+                            <RxDotFilled />
+                        </div>
+                    ))}
+                </div>
             </div>
-            {/* Right Arrow */}
-            <div className='hidden group-hover:block absolute md:top-[50%] top-[40%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
-                <BsChevronCompactRight onClick={nextSlide} size={30} />
-            </div>
-            <div className='flex top-4 justify-center py-2'>
-                {slides.map((slide, slideIndex) => (
-                    <div
-                        key={slideIndex}
-                        onClick={() => goToSlide(slideIndex)}
-                        className='text-2xl cursor-pointer'
-                    >
-                        <RxDotFilled />
-                    </div>
-                ))}
-            </div>
-        </div>
+        </section>
     );
 };
 
