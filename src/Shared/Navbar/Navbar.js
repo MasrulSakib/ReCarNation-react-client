@@ -23,14 +23,12 @@ const Navbar = () => {
                     </div>
                     <Link className="btn btn-ghost md:text-2xl text-xl font-semibold"><button>Re<span className='text-red-500'>Car</span>Nation</button></Link>
                 </div>
-                <div className="navbar-center hidden lg:flex">
+                <div className="navbar-end hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         {menuItems}
                     </ul>
                 </div>
-                <div className="navbar-end">
-                    <button className='btn btn-error'>button</button>
-                </div>
+
             </div>
         </div>
     );
