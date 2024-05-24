@@ -51,18 +51,18 @@ const Banner = () => {
                     className='w-full h-full bg-center bg-cover duration-500 img-gradient'
                     style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
                 ></div>
-                <div className="absolute flex justify-start transform -translate-y-1/2 left-24 top-1/4 z-20">
-                    <h2 className=' text-6xl text-white font-semibold md:text-left text-center'>
+                <div className="absolute flex justify-start transform -translate-y-1/2 md:left-24 left-4 md:top-1/4 top-16 z-20">
+                    <h2 className=' md:text-6xl text-2xl text-white font-semibold text-left'>
                         Drive Your Dream <br />
                         for Less with <br />
                         <Link >
-                            <button className="btn btn-error btn-outline btn-lg font-semibold text-4xl rounded-none mt-5">ReCarNation</button>
+                            <button className="btn btn-error btn-outline btn-xs md:btn-lg font-semibold text-base md:text-4xl rounded-none mt-2 md:mt-5">ReCarNation</button>
                         </Link>
                     </h2>
 
                 </div>
-                <div className="absolute flex justify-start transform -translate-y-1/2 left-24 top-2/4 w-1/2 md:text-left text-center z-20">
-                    <p className='text-lg text-white'>Unlock incredible deals on top-quality pre-owned cars. At ReCarNation, we transform the car buying and selling experience with unmatched value, trust, and convenience. Discover your next ride today and join the revolution of smart car ownership!</p>
+                <div className="absolute hidden md:flex justify-start transform -translate-y-1/2 left-4 md:left-24 top-2/4 md:w-1/2 w-10/12 text-left z-20">
+                    <p className='text-sm md:text-lg text-white '>Unlock incredible deals on top-quality pre-owned cars. At ReCarNation, we transform the car buying and selling experience with unmatched value, trust, and convenience. Discover your next ride today and join the revolution of smart car ownership!</p>
 
                 </div>
                 {/* Left Arrow */}

@@ -32,8 +32,8 @@ const CarsCategory = () => {
 
 
     return (
-        <section className='md:container md:mx-auto mx-5 my-20'>
-            <h2 className='text-3xl font-semibold text-error text-center mb-10'>Select a Category</h2>
+        <section className='md:container md:mx-auto mx-4 my-20'>
+            <h2 className='text-2xl md:text-3xl font-semibold text-error text-center mb-10'>Select a Category</h2>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {
                     carsBrand.map(car => <CarsList

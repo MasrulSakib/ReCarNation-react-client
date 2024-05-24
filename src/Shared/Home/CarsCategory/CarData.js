@@ -1,10 +1,10 @@
 import React from 'react';
 
-const CarData = ({ carData }) => {
+const CarData = ({ carData, setProducts }) => {
     const { name, location, seller_name, picture, resale_price, original_price, years_of_use, posted_time } = carData;
     return (
-        <div className='md:container md:mx-auto mx-4'>
-            <div className="card md:w-[850px] md:h-[500px] lg:card-side bg-error shadow-xl mx-auto">
+        <div className='lg:container lg:mx-auto mx-4'>
+            <div className="card lg:w-[850px] lg:h-[500px] md:card-side bg-error shadow-xl mx-auto">
                 <figure><img className='w-[600px] h-full' src={picture} alt="Album" /></figure>
                 <div className="flex flex-col py-4 ps-4 justify-between">
 
@@ -19,7 +19,11 @@ const CarData = ({ carData }) => {
                     </div>
 
                     <div className="flex justify-end me-5 mt-2 md:mt-0">
-                        <button className='btn btn-outline btn-ghost rounded-none'>PURCHASE</button>
+                        <label htmlFor="booking-modal"
+                            className="btn-sm md:btn-md md:pt-3 pt-1 btn-outline btn-ghost rounded-none"
+                            onClick={() => setProducts(carData)}>
+                            Book now
+                        </label>
                     </div>
                 </div>
             </div>
