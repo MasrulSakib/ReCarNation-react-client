@@ -1,26 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import backgroundImg from '../../Assets/BG/SignUp.jpg'
+import { AuthContext } from '../Context/AuthProvider';
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const { createUser } = useContext(AuthContext)
 
     const handleSignUp = (data) => {
         console.log(data)
-        // createUser(data.email, data.password)
-        //     .then(result => {
-        //         const user = result.user;
-        //         console.log(user)
-        //         const userProfile = {
-        //             displayName: data.name,
-        //         }
-        //         updateUser(userProfile)
-        //             .then(() => {
-        //                 saveUsers(data.name, data.email)
-        //             })
-        //             .catch(error => console.error(error))
-        //     })
-        //     .catch(error => console.error(error));
+        createUser(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                // const userProfile = {
+                //     displayName: data.name,
+                // }
+                // updateUser(userProfile)
+                //     .then(() => {
+                //         saveUsers(data.name, data.email)
+                //     })
+                //     .catch(error => console.error(error))
+            })
+            .catch(error => console.error(error));
 
     }
 
@@ -85,6 +88,7 @@ const SignUp = () => {
 
                 </label>
                 <button type='submit' className='btn btn-error'>SIGN UP</button>
+                <p className='text-center'>Already Registered? Please <Link to='/login' className='text-error font-semibold'>Login</Link></p>
             </form>
 
         </section>

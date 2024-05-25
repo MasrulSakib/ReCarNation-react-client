@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import backgroundImg from '../../Assets/BG/Login.jpg'
 import { FaGoogle } from 'react-icons/fa';
+import { AuthContext } from '../Context/AuthProvider';
+import { Link } from 'react-router-dom';
 
 
 
@@ -10,10 +12,23 @@ import { FaGoogle } from 'react-icons/fa';
 const Login = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [data, setData] = useState("");
+    const { userSignIn } = useContext(AuthContext)
+    const [error, setError] = useState('');
 
     const handleLogin = data => {
         console.log(data)
+        setError('')
+        userSignIn(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                // setUserLoginEmail(data?.email)
+
+            })
+            .catch(error => {
+                console.error(error)
+                setError(error.message)
+            })
     }
 
     return (
@@ -68,6 +83,13 @@ const Login = () => {
                     {errors.password && <p className='text-error' role="alert">{errors.password.message}</p>}
                 </label>
                 <button type='submit' className='btn btn-error'>LOGIN</button>
+                <p className='text-red-600 text-center'>
+                    {
+                        error &&
+                        <span>{error}</span>
+                    }
+                </p>
+                <p className='text-center'>New to ReCarNation? <Link to='/signup' className='text-error font-semibold'>Create New Account</Link></p>
                 <div className="divider divider-error text-error mb-4">OR</div>
                 <button className='w-full btn btn-outline btn-ghost'><FaGoogle className='text-xl'></FaGoogle> LOGIN WITH GOOGLE</button>
             </form>
