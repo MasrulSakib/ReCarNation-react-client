@@ -1,12 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import backgroundImg from '../../Assets/BG/Login.jpg'
-import { FaGoogle } from 'react-icons/fa';
 import { AuthContext } from '../Context/AuthProvider';
 import { Link } from 'react-router-dom';
-
-
-
+import GoogleLogin from '../SocialLogin/GoogleLogin';
 
 
 const Login = () => {
@@ -29,6 +26,8 @@ const Login = () => {
                 console.error(error)
                 setError(error.message)
             })
+
+
     }
 
     return (
@@ -91,7 +90,7 @@ const Login = () => {
                 </p>
                 <p className='text-center'>New to ReCarNation? <Link to='/signup' className='text-error font-semibold'>Create New Account</Link></p>
                 <div className="divider divider-error text-error mb-4">OR</div>
-                <button className='w-full btn btn-outline btn-ghost'><FaGoogle className='text-xl'></FaGoogle> LOGIN WITH GOOGLE</button>
+                <GoogleLogin></GoogleLogin>
             </form>
         </section>
     );

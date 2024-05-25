@@ -3,10 +3,11 @@ import { useForm } from 'react-hook-form';
 import backgroundImg from '../../Assets/BG/SignUp.jpg'
 import { AuthContext } from '../Context/AuthProvider';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser } = useContext(AuthContext)
+    const { createUser, updateUser } = useContext(AuthContext)
 
     const handleSignUp = (data) => {
         console.log(data)
@@ -14,16 +15,39 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
-                // const userProfile = {
-                //     displayName: data.name,
-                // }
-                // updateUser(userProfile)
-                //     .then(() => {
-                //         saveUsers(data.name, data.email)
-                //     })
-                //     .catch(error => console.error(error))
+                const userProfile = {
+                    displayName: data.name,
+                }
+                updateUser(userProfile)
+                    .then(() => {
+                        saveUsers(data.name, data.email, data.usertype)
+                    })
+                    .catch(error => console.error(error))
             })
             .catch(error => console.error(error));
+
+    }
+
+    const saveUsers = (name, email, usertype) => {
+        const user = { name, email, usertype };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        })
+
+            .then(res => res.json())
+            .then(data => {
+                console.log('Data:', data)
+                if (data.acknowledged) {
+                    toast.success('User Created Successfully')
+                }
+                else {
+                    toast.error('Registration Failed. Please try again')
+                }
+            })
 
     }
 
