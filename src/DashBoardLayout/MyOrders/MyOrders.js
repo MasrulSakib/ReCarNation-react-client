@@ -42,7 +42,7 @@ const MyOrders = () => {
                     <thead>
                         <tr>
                             <th></th>
-                            <th></th>
+                            <th>Action</th>
                             <th>Image</th>
                             <th>Model</th>
                             <th>Price</th>
@@ -55,6 +55,7 @@ const MyOrders = () => {
                             bookings?.map((booking, i) =>
 
                                 <tr key={booking._id}>
+                                    <th>{i + 1}</th>
                                     <th>
                                         {
                                             <button onClick={() => deleteBooked(booking)} className="btn btn-circle btn-outline">
@@ -63,7 +64,7 @@ const MyOrders = () => {
                                         }
 
                                     </th>
-                                    <th>{i + 1}</th>
+
                                     <td>
                                         {
                                             <div className="avatar">

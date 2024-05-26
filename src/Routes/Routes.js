@@ -7,8 +7,8 @@ import Login from '../UserValidation/Login/Login';
 import SignUp from '../UserValidation/SignUp/SignUp';
 import PrivateRoutes from './privateRoutes';
 import DashboardLayout from '../DashBoardLayout/DashboardLayout';
-import Dashboard from '../DashBoardLayout/Dashboard/Dashboard';
 import MyOrders from '../DashBoardLayout/MyOrders/MyOrders';
+import NotFound from '../NotFound/NotFound';
 
 
 export const router = createBrowserRouter([
@@ -49,5 +49,9 @@ export const router = createBrowserRouter([
                 element: <MyOrders></MyOrders>
             }
         ]
+    },
+    {
+        path: '*',
+        element: <NotFound></NotFound>
     },
 ])
