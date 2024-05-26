@@ -7,7 +7,7 @@ const PrivateRoutes = ({ children }) => {
     const location = useLocation()
 
     if (loader) {
-        return <p className='flex justify-center'><span className="loading loading-infinity loading-lg "></span></p>
+        return <p className='flex justify-center items-center min-h-screen'><span className="loading loading-infinity loading-lg "></span></p>
     }
 
     if (!user) {

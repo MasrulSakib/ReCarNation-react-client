@@ -42,14 +42,14 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <Link className="btn btn-ghost md:text-2xl text-xl font-semibold"><button>Re<span className='text-error'>Car</span>Nation</button></Link>
+                <Link to={'/'} className="btn btn-ghost md:text-2xl text-xl font-semibold"><button>Re<span className='text-error'>Car</span>Nation</button></Link>
             </div>
             <div className="navbar-end hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     {menuItems}
                 </ul>
             </div>
-            <div className='navbar-end md:hidden'>
+            <div className='navbar-end lg:hidden'>
                 <label htmlFor="dashborad-drawer" tabIndex={2} role="button" className="btn btn-ghost lg:hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                 </label>

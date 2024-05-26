@@ -5,10 +5,11 @@ import Blog from '../Shared/Blog/Blog';
 import CategorizedCars from '../Shared/Home/CarsCategory/CategorizedCars';
 import Login from '../UserValidation/Login/Login';
 import SignUp from '../UserValidation/SignUp/SignUp';
-import PrivateRoutes from './privateRoutes';
+import PrivateRoutes from './PrivateRoutes';
 import DashboardLayout from '../DashBoardLayout/DashboardLayout';
 import MyOrders from '../DashBoardLayout/MyOrders/MyOrders';
 import NotFound from '../NotFound/NotFound';
+import PrivateBuyer from './PrivateBuyer';
 
 
 export const router = createBrowserRouter([
@@ -45,8 +46,8 @@ export const router = createBrowserRouter([
         element: <PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
         children: [
             {
-                path: '/dashboard',
-                element: <MyOrders></MyOrders>
+                path: '/dashboard/myorders',
+                element: <PrivateBuyer><MyOrders></MyOrders></PrivateBuyer>
             }
         ]
     },
