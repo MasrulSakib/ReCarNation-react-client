@@ -2,8 +2,9 @@ import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import backgroundImg from '../../Assets/BG/Login.jpg'
 import { AuthContext } from '../Context/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import GoogleLogin from '../SocialLogin/GoogleLogin';
+import toast from 'react-hot-toast';
 
 
 const Login = () => {
@@ -12,6 +13,10 @@ const Login = () => {
     const { userSignIn } = useContext(AuthContext)
     const [error, setError] = useState('');
 
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/'
+
     const handleLogin = data => {
         console.log(data)
         setError('')
@@ -19,12 +24,17 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
+                if (user?.uid) {
+                    navigate(from, { replace: true })
+                    toast.success('Login Successful')
+                }
                 // setUserLoginEmail(data?.email)
 
             })
             .catch(error => {
                 console.error(error)
                 setError(error.message)
+                toast.error(error.message)
             })
 
 

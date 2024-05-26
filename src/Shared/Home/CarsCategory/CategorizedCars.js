@@ -24,6 +24,7 @@ const CategorizedCars = () => {
                     products &&
                     <BookingModal
                         products={products}
+                        setProducts={setProducts}
                     ></BookingModal>
                 }
             </div>

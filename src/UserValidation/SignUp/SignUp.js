@@ -2,12 +2,13 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import backgroundImg from '../../Assets/BG/SignUp.jpg'
 import { AuthContext } from '../Context/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { createUser, updateUser } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const handleSignUp = (data) => {
         console.log(data)
@@ -21,10 +22,14 @@ const SignUp = () => {
                 updateUser(userProfile)
                     .then(() => {
                         saveUsers(data.name, data.email, data.usertype)
+                        navigate('/');
                     })
                     .catch(error => console.error(error))
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error(error)
+                toast.error(error.message)
+            });
 
     }
 
@@ -43,9 +48,6 @@ const SignUp = () => {
                 console.log('Data:', data)
                 if (data.acknowledged) {
                     toast.success('User Created Successfully')
-                }
-                else {
-                    toast.error('Registration Failed. Please try again')
                 }
             })
 
@@ -106,7 +108,7 @@ const SignUp = () => {
                     </div>
                     <select {...register("usertype")} placeholder="usertype" className="select select-error w-full">
                         <option disabled>Admin(Access Denied)</option>
-                        <option>Buyer</option>
+                        <option selected>Buyer</option>
                         <option>Seller</option>
                     </select>
 

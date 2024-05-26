@@ -5,6 +5,7 @@ import Blog from '../Shared/Blog/Blog';
 import CategorizedCars from '../Shared/Home/CarsCategory/CategorizedCars';
 import Login from '../UserValidation/Login/Login';
 import SignUp from '../UserValidation/SignUp/SignUp';
+import PrivateRoutes from './privateRoutes';
 
 
 export const router = createBrowserRouter([
@@ -22,7 +23,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/categorizedcars/:company',
-                element: <CategorizedCars></CategorizedCars>,
+                element: <PrivateRoutes><CategorizedCars></CategorizedCars></PrivateRoutes>,
                 loader: ({ params }) => fetch(`http://localhost:5000/cars/${params.company}`)
             },
             {

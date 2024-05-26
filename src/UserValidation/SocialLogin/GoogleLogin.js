@@ -3,9 +3,15 @@ import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import { FaGoogle } from 'react-icons/fa';
 import toast from 'react-hot-toast';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const GoogleLogin = () => {
     const { googleLogIn } = useContext(AuthContext)
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/'
+
     const handleGoogleLogin = () => {
         googleLogIn()
             .then(result => {
@@ -34,13 +40,14 @@ const GoogleLogin = () => {
             .then(data => {
                 console.log('Data:', data)
                 if (data.acknowledged) {
-                    toast.success('Login Successfull')
-                }
-                else {
-                    toast.error('Login Failed. Please try again')
+                    navigate(from, { replace: true })
+                    toast.success('Login Successful')
                 }
             })
-
+            .catch(error => {
+                console.error(error)
+                toast.error(error.message)
+            })
     }
 
     return (

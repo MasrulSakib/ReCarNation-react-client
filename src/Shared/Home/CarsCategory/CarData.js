@@ -1,4 +1,5 @@
 import React from 'react';
+import { MdVerifiedUser } from 'react-icons/md';
 
 const CarData = ({ carData, setProducts }) => {
     const { name, location, seller_name, picture, resale_price, original_price, years_of_use, posted_time } = carData;
@@ -10,7 +11,17 @@ const CarData = ({ carData, setProducts }) => {
 
                     <div className=' text-left gap-0 p-0'>
                         <h2 className="card-title mb-6">Model: {name}</h2>
-                        <p>Name: {seller_name}</p>
+                        {
+                            carData.status &&
+                            <p className='flex items-center'>
+                                Name: {seller_name}
+                                <MdVerifiedUser className='text-xl ml-2 text-blue-600' />
+                            </p>
+                        }
+                        {
+                            !carData.status &&
+                            <p>Name: {seller_name}</p>
+                        }
                         <p>Location: {location}</p>
                         <p>Selling Price: ${resale_price}</p>
                         <p>Original Price: ${original_price}</p>
