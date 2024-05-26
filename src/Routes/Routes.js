@@ -6,6 +6,9 @@ import CategorizedCars from '../Shared/Home/CarsCategory/CategorizedCars';
 import Login from '../UserValidation/Login/Login';
 import SignUp from '../UserValidation/SignUp/SignUp';
 import PrivateRoutes from './privateRoutes';
+import DashboardLayout from '../DashBoardLayout/DashboardLayout';
+import Dashboard from '../DashBoardLayout/Dashboard/Dashboard';
+import MyOrders from '../DashBoardLayout/MyOrders/MyOrders';
 
 
 export const router = createBrowserRouter([
@@ -33,7 +36,18 @@ export const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <SignUp></SignUp>
+            },
+
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
+        children: [
+            {
+                path: '/dashboard',
+                element: <MyOrders></MyOrders>
             }
         ]
-    }
+    },
 ])

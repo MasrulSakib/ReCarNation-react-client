@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 const BookingModal = ({ products, setProducts }) => {
-    const { name, resale_price } = products;
+    const { name, resale_price, picture } = products;
     const { user } = useContext(AuthContext)
     const { register, handleSubmit } = useForm();
 
@@ -14,17 +14,18 @@ const BookingModal = ({ products, setProducts }) => {
         data.model = name;
         data.selling_price = resale_price;
         console.log(data)
-        storeBookedData(data.name, data.email, data.model, data.selling_price, data.phone, data.meet_location)
+        storeBookedData(data.name, data.email, data.model, data.selling_price, data.phone, data.meet_location, picture)
     }
 
-    const storeBookedData = (name, email, model, sellingPrice, phone, meetLocation) => {
+    const storeBookedData = (name, email, model, sellingPrice, phone, meetLocation, picture) => {
         const bookedData = {
             name,
             email,
             model,
             sellingPrice,
             phone,
-            meetLocation
+            meetLocation,
+            picture
         };
         fetch('http://localhost:5000/bookings', {
             method: 'POST',
