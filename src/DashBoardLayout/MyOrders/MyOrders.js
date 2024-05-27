@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 
 const MyOrders = () => {
     const { user } = useContext(AuthContext)
+    console.log('user', user)
 
     const { data: bookings = [], isLoading, refetch } = useQuery({
         queryKey: ['bookings', user?.email],

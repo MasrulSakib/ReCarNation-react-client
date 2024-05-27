@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
 import Navbar from '../Shared/Navbar/Navbar';
 import { Link, Outlet } from 'react-router-dom';
-import Footer from '../Shared/Footer/Footer';
 import useBuyer from '../Hooks/useBuyer';
 import { AuthContext } from '../UserValidation/Context/AuthProvider';
+import useAdmin from '../Hooks/useAdmin';
 
 const DashboardLayout = () => {
     const { user } = useContext(AuthContext)
     const [isBuyer] = useBuyer(user?.email)
+    const [isAdmin] = useAdmin(user?.email)
 
     return (
         <div className='min-h-screen'>
@@ -23,6 +24,14 @@ const DashboardLayout = () => {
                         {
                             isBuyer &&
                             <li><Link to={'/dashboard/myorders'}>My Orders</Link></li>
+                        }
+                        {
+                            isAdmin &&
+                            <>
+                                <li><Link to={'/dashboard/allusers'}>All Users</Link></li>
+                                <li><Link to={'/dashboard/users/buyers'}>All Buyers</Link></li>
+                                <li><Link to={'/dashboard/users/sellers'}>All Sellers</Link></li>
+                            </>
                         }
                     </ul>
                 </div>

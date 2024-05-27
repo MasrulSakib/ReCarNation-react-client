@@ -10,6 +10,10 @@ import DashboardLayout from '../DashBoardLayout/DashboardLayout';
 import MyOrders from '../DashBoardLayout/MyOrders/MyOrders';
 import NotFound from '../NotFound/NotFound';
 import PrivateBuyer from './PrivateBuyer';
+import PrivateAdmin from './PrivateAdmin';
+import AllUsers from '../DashBoardLayout/AllUsers/AllUsers';
+import AllBuyers from '../DashBoardLayout/AllUsers/AllBuyers';
+import AllSellers from '../DashBoardLayout/AllUsers/AllSellers';
 
 
 export const router = createBrowserRouter([
@@ -30,15 +34,6 @@ export const router = createBrowserRouter([
                 element: <PrivateRoutes><CategorizedCars></CategorizedCars></PrivateRoutes>,
                 loader: ({ params }) => fetch(`http://localhost:5000/cars/${params.company}`)
             },
-            {
-                path: '/login',
-                element: <Login></Login>
-            },
-            {
-                path: '/signup',
-                element: <SignUp></SignUp>
-            },
-
         ]
     },
     {
@@ -48,11 +43,35 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/myorders',
                 element: <PrivateBuyer><MyOrders></MyOrders></PrivateBuyer>
-            }
+            },
+            {
+                path: '/dashboard/allusers',
+                element: <PrivateAdmin><AllUsers></AllUsers></PrivateAdmin>,
+                children: [
+                    {
+                        path: '/dashboard/users/buyers',
+                        element: <PrivateAdmin><AllBuyers></AllBuyers></PrivateAdmin>
+                    },
+                    {
+                        path: '/dashboard/users/sellers',
+                        element: <PrivateAdmin><AllSellers></AllSellers></PrivateAdmin>
+                    }
+                ]
+            },
+
         ]
+    },
+    {
+        path: '/login',
+        element: <Login></Login>
+    },
+    {
+        path: '/signup',
+        element: <SignUp></SignUp>
     },
     {
         path: '*',
         element: <NotFound></NotFound>
     },
+
 ])
