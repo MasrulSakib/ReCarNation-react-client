@@ -1,15 +1,53 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../UserValidation/Context/AuthProvider';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const AddProducts = () => {
 
     const { user } = useContext(AuthContext)
+    const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString().split('T')[0];
+
     const handleAddProduct = data => {
-        console.log(data)
+        const product = {
+            seller_name: data.seller_name,
+            email: data.email,
+            company: data.company,
+            name: data.name,
+            original_price: parseInt(data.original_price),
+            resale_price: parseInt(data.resale_price),
+            condition: data.condition,
+            phone: parseInt(data.phone),
+            location: data.location,
+            years_of_use: parseInt(data.years_of_use),
+            picture: data.picture,
+            posted_time: data.date
+        }
+
+        fetch(`http://localhost:5000/cars`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                // authorization: `bearer ${localStorage.getItem('accessToken')}`,
+            },
+
+            body: JSON.stringify(product)
+        })
+
+            .then(res => res.json())
+            .then(result => {
+                console.log(result);
+                toast.success(`${data.company} ${data.name} is successfully added`)
+                navigate('/dashboard/myproducts')
+            })
     }
+
+
 
     return (
         <div className='md:container md:mx-auto mx-5 min-h-screen'>
@@ -69,8 +107,8 @@ const AddProducts = () => {
                         <div className="label">
                             <span className="label-text">Selling Price</span>
                         </div>
-                        <input {...register("selling_price", { required: 'Selling price is required' })} type="text" placeholder="Selling Price" className="input input-bordered input-error w-full" />
-                        {errors.selling_price && <p className='text-error' role="alert">{errors.selling_price.message}</p>}
+                        <input {...register("resale_price", { required: 'Selling price is required' })} type="text" placeholder="Selling Price" className="input input-bordered input-error w-full" />
+                        {errors.resale_price && <p className='text-error' role="alert">{errors.resale_price.message}</p>}
                     </label>
 
                     <label>
@@ -105,10 +143,23 @@ const AddProducts = () => {
                         <div className="label">
                             <span className="label-text">Years of use</span>
                         </div>
-                        <input {...register("years_of_use", { required: 'years of use is required' })} type="text" placeholder="Your location" className="input input-bordered input-error w-full" />
+                        <input {...register("years_of_use", { required: 'Years of use is required' })} type="number" placeholder="Your product using duration in years" className="input input-bordered input-error w-full" />
                         {errors.years_of_use && <p className='text-error' role="alert">{errors.years_of_use.message}</p>}
                     </label>
-
+                    <label className="form-control w-full">
+                        <div className="label">
+                            <span className="label-text">Cars Photo URL</span>
+                        </div>
+                        <input {...register("picture", { required: 'Photo is required' })} type="text" placeholder="Your Cars Photo URL" className="input input-bordered input-error w-full" />
+                        {errors.picture && <p className='text-error' role="alert">{errors.picture.message}</p>}
+                    </label>
+                    <label className='form-control w-full'>
+                        <div className="label">
+                            <span className="label-text">Uploading Date</span>
+                        </div>
+                        <input {...register("date", { required: 'Date is required' })} type="date" defaultValue={formattedDate} readOnly className="input input-bordered input-error w-full" />
+                        {errors.date && <p className='text-error' role="alert">{errors.date.message}</p>}
+                    </label>
 
                 </div>
                 <input type="submit" value="Add Product" className='btn btn-error w-full' />

@@ -16,6 +16,7 @@ import AllBuyers from '../DashBoardLayout/AllUsers/AllBuyers';
 import AllSellers from '../DashBoardLayout/AllUsers/AllSellers';
 import AddProducts from '../DashBoardLayout/AddProducts/AddProducts';
 import PrivateSeller from './PrivateSeller';
+import MyProducts from '../DashBoardLayout/MyProducts/MyProducts';
 
 
 export const router = createBrowserRouter([
@@ -61,7 +62,11 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/addproduct',
                 element: <PrivateSeller><AddProducts></AddProducts></PrivateSeller>
-            }
+            },
+            {
+                path: '/dashboard/myproducts',
+                element: <PrivateSeller><MyProducts></MyProducts></PrivateSeller>
+            },
 
         ]
     },
