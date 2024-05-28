@@ -22,7 +22,7 @@ const SignUp = () => {
                 }
                 updateUser(userProfile)
                     .then(() => {
-                        saveUsers(data.name, data.email)
+                        saveUsers(data.name, data.email, data.usertype)
                         navigate('/');
                     })
                     .catch(error => console.error(error))

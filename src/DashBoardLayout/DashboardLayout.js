@@ -4,11 +4,13 @@ import { Link, Outlet } from 'react-router-dom';
 import useBuyer from '../Hooks/useBuyer';
 import { AuthContext } from '../UserValidation/Context/AuthProvider';
 import useAdmin from '../Hooks/useAdmin';
+import useSeller from '../Hooks/useSeller';
 
 const DashboardLayout = () => {
     const { user } = useContext(AuthContext)
     const [isBuyer] = useBuyer(user?.email)
     const [isAdmin] = useAdmin(user?.email)
+    const [isSeller] = useSeller(user?.email)
 
     return (
         <div className='min-h-screen'>
@@ -24,6 +26,10 @@ const DashboardLayout = () => {
                         {
                             isBuyer &&
                             <li><Link to={'/dashboard/myorders'}>My Orders</Link></li>
+                        }
+                        {
+                            isSeller &&
+                            <li><Link to={'/dashboard/addproduct'}>Add a Product</Link></li>
                         }
                         {
                             isAdmin &&

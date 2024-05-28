@@ -14,6 +14,8 @@ import PrivateAdmin from './PrivateAdmin';
 import AllUsers from '../DashBoardLayout/AllUsers/AllUsers';
 import AllBuyers from '../DashBoardLayout/AllUsers/AllBuyers';
 import AllSellers from '../DashBoardLayout/AllUsers/AllSellers';
+import AddProducts from '../DashBoardLayout/AddProducts/AddProducts';
+import PrivateSeller from './PrivateSeller';
 
 
 export const router = createBrowserRouter([
@@ -47,17 +49,19 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/allusers',
                 element: <PrivateAdmin><AllUsers></AllUsers></PrivateAdmin>,
-                children: [
-                    {
-                        path: '/dashboard/users/buyers',
-                        element: <PrivateAdmin><AllBuyers></AllBuyers></PrivateAdmin>
-                    },
-                    {
-                        path: '/dashboard/users/sellers',
-                        element: <PrivateAdmin><AllSellers></AllSellers></PrivateAdmin>
-                    }
-                ]
             },
+            {
+                path: '/dashboard/users/buyers',
+                element: <PrivateAdmin><AllBuyers></AllBuyers></PrivateAdmin>
+            },
+            {
+                path: '/dashboard/users/sellers',
+                element: <PrivateAdmin><AllSellers></AllSellers></PrivateAdmin>
+            },
+            {
+                path: '/dashboard/addproduct',
+                element: <PrivateSeller><AddProducts></AddProducts></PrivateSeller>
+            }
 
         ]
     },
