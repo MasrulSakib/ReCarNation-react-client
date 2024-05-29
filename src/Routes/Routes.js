@@ -17,6 +17,8 @@ import AllSellers from '../DashBoardLayout/AllUsers/AllSellers';
 import AddProducts from '../DashBoardLayout/AddProducts/AddProducts';
 import PrivateSeller from './PrivateSeller';
 import MyProducts from '../DashBoardLayout/MyProducts/MyProducts';
+import ReportedCars from '../DashBoardLayout/ReportedCars/ReportedCars';
+// import CarData from '../Shared/Home/CarsCategory/CarData';
 
 
 export const router = createBrowserRouter([
@@ -60,6 +62,10 @@ export const router = createBrowserRouter([
                 element: <PrivateAdmin><AllSellers></AllSellers></PrivateAdmin>
             },
             {
+                path: '/dashboard/reportedcars/post',
+                element: <PrivateAdmin><ReportedCars></ReportedCars></PrivateAdmin>
+            },
+            {
                 path: '/dashboard/addproduct',
                 element: <PrivateSeller><AddProducts></AddProducts></PrivateSeller>
             },
@@ -70,6 +76,7 @@ export const router = createBrowserRouter([
 
         ]
     },
+
     {
         path: '/login',
         element: <Login></Login>
