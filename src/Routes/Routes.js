@@ -18,6 +18,7 @@ import AddProducts from '../DashBoardLayout/AddProducts/AddProducts';
 import PrivateSeller from './PrivateSeller';
 import MyProducts from '../DashBoardLayout/MyProducts/MyProducts';
 import ReportedCars from '../DashBoardLayout/ReportedCars/ReportedCars';
+import Payment from '../DashBoardLayout/Payment/Payment';
 // import CarData from '../Shared/Home/CarsCategory/CarData';
 
 
@@ -48,6 +49,11 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/myorders',
                 element: <PrivateBuyer><MyOrders></MyOrders></PrivateBuyer>
+            },
+            {
+                path: '/dashboard/bookings/:id',
+                element: <Payment></Payment>,
+                loader: ({ params }) => fetch(`http://localhost:5000/dashboard/bookings/${params.id}`)
             },
             {
                 path: '/dashboard/allusers',

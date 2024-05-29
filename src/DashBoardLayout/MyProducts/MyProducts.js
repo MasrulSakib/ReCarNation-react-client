@@ -46,6 +46,7 @@ const MyProducts = () => {
                             <th>Model</th>
                             <th>Price</th>
                             <th>Status</th>
+                            <th>Boost Ad</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,6 +73,12 @@ const MyProducts = () => {
                                     <td>{product.company} {product.name}</td>
                                     <td><p>${product.resale_price}</p></td>
                                     <td>{status}</td>
+                                    <td>
+                                        {
+                                            status === "Available" &&
+                                            <button className='btn-sm btn btn-outline'>Advertise</button>
+                                        }
+                                    </td>
                                 </tr>
                             );
                         })}

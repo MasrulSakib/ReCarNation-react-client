@@ -5,7 +5,7 @@ import useBuyer from '../../../Hooks/useBuyer';
 import toast from 'react-hot-toast';
 
 const CarData = ({ carData, setProducts }) => {
-    const { name, location, seller_name, picture, resale_price, original_price, years_of_use, posted_time, _id } = carData;
+    const { name, company, location, seller_name, picture, resale_price, original_price, years_of_use, posted_time, _id } = carData;
     const { user } = useContext(AuthContext)
     const [isBuyer] = useBuyer(user?.email)
 
@@ -29,7 +29,7 @@ const CarData = ({ carData, setProducts }) => {
                 <figure><img className='w-[600px] h-full' src={picture} alt="Album" /></figure>
                 <div className='flex flex-col justify-between text-left'>
                     <div className='card-body'>
-                        <h2 className="card-title mb-6">Model: {name}</h2>
+                        <h2 className="card-title mb-6">{company} {name}</h2>
                         <div>
                             {
                                 carData.status === "verified" &&
