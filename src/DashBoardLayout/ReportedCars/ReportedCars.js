@@ -8,7 +8,11 @@ const ReportedCars = () => {
     const { data: reportedCars = [], isLoading, refetch } = useQuery({
         queryKey: ['post'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/dashboard/reportedcars/post')
+            const res = await fetch('http://localhost:5000/dashboard/reportedcars/post', {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
             const data = await res.json();
             return data;
         }
@@ -17,6 +21,9 @@ const ReportedCars = () => {
     const deletePost = (reportedCar) => {
         fetch(`http://localhost:5000/dashboard/reportedcars/post/${reportedCar._id}`, {
             method: 'DELETE',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
         })
             .then(res => res.json())
             .then(data => {

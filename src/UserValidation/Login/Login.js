@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import GoogleLogin from '../SocialLogin/GoogleLogin';
 import toast from 'react-hot-toast';
 import Navbar from '../../Shared/Navbar/Navbar';
+import useToken from '../../Hooks/useToken';
 
 
 const Login = () => {
@@ -18,6 +19,15 @@ const Login = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname || '/'
 
+    const [userLoginEmail, setUserLoginEmail] = useState('')
+    const [token] = useToken(userLoginEmail);
+
+    if (token) {
+        navigate(from, { replace: true })
+        toast.success('User Login Successful')
+
+    }
+
     const handleLogin = data => {
         console.log(data)
         setError('')
@@ -25,11 +35,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
-                if (user?.uid) {
-                    navigate(from, { replace: true })
-                    toast.success('Login Successful')
-                }
-                // setUserLoginEmail(data?.email)
+                setUserLoginEmail(data?.email)
 
             })
             .catch(error => {

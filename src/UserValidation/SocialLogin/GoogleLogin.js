@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import { FaGoogle } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
+import useToken from '../../Hooks/useToken';
 
 const GoogleLogin = () => {
     const { googleLogIn } = useContext(AuthContext)
@@ -11,6 +12,15 @@ const GoogleLogin = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/'
+
+    const [userGoogleEmail, setGoogleEmail] = useState('')
+    const [token] = useToken(userGoogleEmail);
+
+    if (token) {
+        navigate(from, { replace: true })
+        toast.success('Login Successful')
+
+    }
 
     const handleGoogleLogin = () => {
         googleLogIn()
@@ -40,8 +50,7 @@ const GoogleLogin = () => {
             .then(data => {
                 console.log('Data:', data)
                 if (data.acknowledged) {
-                    navigate(from, { replace: true })
-                    toast.success('Login Successful')
+                    setGoogleEmail(email)
                 }
             })
             .catch(error => {

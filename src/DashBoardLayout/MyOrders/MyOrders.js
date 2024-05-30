@@ -11,7 +11,11 @@ const MyOrders = () => {
     const { data: bookings = [], isLoading, refetch } = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/bookings?email=${user?.email}`)
+            const res = await fetch(`http://localhost:5000/bookings?email=${user?.email}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
             const data = await res.json()
             return data;
         }
@@ -20,6 +24,9 @@ const MyOrders = () => {
     const deleteBooked = (booking) => {
         fetch(`http://localhost:5000/bookings/${booking._id}`, {
             method: 'DELETE',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`,
+            },
         })
             .then(res => res.json())
             .then(data => {
