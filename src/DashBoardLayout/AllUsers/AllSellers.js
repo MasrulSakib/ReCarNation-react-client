@@ -14,9 +14,28 @@ const AllSellers = () => {
                 }
             })
             const data = await res.json();
-            return data;
+            return Array.isArray(data) ? data : []; // Ensure data is an array
         }
     })
+
+
+    const handleUserStatus = async (user) => {
+        try {
+            const res = await fetch(`http://localhost:5000/users/status/${user?.email}`, {
+                method: 'PUT',
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
+            const data = await res.json();
+            if (data.carsResult.modifiedCount > 0 || data.usersResult.modifiedCount > 0) {
+                toast.success('User status updated');
+                refetch();
+            }
+        } catch (error) {
+            toast.error('Failed to update user status');
+        }
+    };
 
     const deleteUser = (user) => {
         fetch(`http://localhost:5000/user/${user?._id}`, {
@@ -50,6 +69,7 @@ const AllSellers = () => {
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th>Status</th>
                             <th>Remove</th>
                         </tr>
                     </thead>
@@ -62,7 +82,32 @@ const AllSellers = () => {
                                     <td>{user.name}</td>
                                     <td>{user?.email}</td>
                                     <td>{user?.usertype}</td>
-                                    <td><button onClick={() => deleteUser(user)} className='btn btn-xs btn-ghost btn-outline'>Delete</button></td>
+                                    <td>
+                                        {!user?.status && (
+                                            <button
+                                                onClick={() => handleUserStatus(user)}
+                                                className="btn btn-xs btn-outline btn-error"
+                                            >
+                                                Verify
+                                            </button>
+                                        )}
+                                        {user?.status && (
+                                            <span
+                                                onClick={() => handleUserStatus(user)}
+                                                className="text-sm text-error"
+                                            >
+                                                Verified
+                                            </span>
+                                        )}
+                                    </td>
+                                    <td>
+                                        <button
+                                            onClick={() => deleteUser(user)}
+                                            className="btn btn-xs btn-ghost btn-outline"
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
                                 </tr>
                             )
                         }
