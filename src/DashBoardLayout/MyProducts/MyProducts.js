@@ -36,6 +36,24 @@ const MyProducts = () => {
             });
     };
 
+    const advertiseProduct = (product) => {
+        fetch(`http://localhost:5000/dashboard/seller/myproducts/advertise/${product._id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                // authorization: `bearer ${localStorage.getItem('accessToken')}`,
+            },
+            body: JSON.stringify({ advertise: true })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    refetch();
+                    toast.success(`${product.company} ${product.name} is now advertised`);
+                }
+            });
+    };
+
     if (isLoading) {
         return <Spinner></Spinner>;
     }
@@ -84,7 +102,7 @@ const MyProducts = () => {
                                     <td>
                                         {
                                             status === "Available" &&
-                                            <button className='btn-sm btn btn-outline'>Advertise</button>
+                                            <button onClick={() => advertiseProduct(product)} className='btn-sm btn btn-outline'>Advertise</button>
                                         }
                                     </td>
                                 </tr>
