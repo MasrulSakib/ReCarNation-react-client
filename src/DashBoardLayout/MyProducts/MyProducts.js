@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../UserValidation/Context/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+import axios from 'axios';
+import Spinner from '../../LoadingSpinner/Spinner';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
@@ -9,13 +11,12 @@ const MyProducts = () => {
     const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: ['myproducts', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/dashboard/seller/myproducts?email=${user?.email}`, {
+            const res = await axios.get(`http://localhost:5000/dashboard/seller/myproducts?email=${user?.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`,
                 }
             });
-            const data = await res.json();
-            return data;
+            return res.data;
         }
     });
 
@@ -36,7 +37,7 @@ const MyProducts = () => {
     };
 
     if (isLoading) {
-        return <p className='flex justify-center items-center min-h-screen'><span className="loading loading-infinity loading-lg "></span></p>;
+        return <Spinner></Spinner>;
     }
 
     return (

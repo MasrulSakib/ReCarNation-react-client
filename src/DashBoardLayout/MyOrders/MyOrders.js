@@ -3,6 +3,7 @@ import { AuthContext } from '../../UserValidation/Context/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import Spinner from '../../LoadingSpinner/Spinner';
 
 const MyOrders = () => {
     const { user } = useContext(AuthContext)
@@ -39,7 +40,7 @@ const MyOrders = () => {
     }
 
     if (isLoading) {
-        return <p className='flex justify-center items-center min-h-screen'><span className="loading loading-infinity loading-lg "></span></p>
+        return <Spinner></Spinner>
     }
     return (
         <div>

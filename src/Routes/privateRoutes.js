@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../UserValidation/Context/AuthProvider';
 import { Navigate, useLocation } from 'react-router-dom'
+import Spinner from '../LoadingSpinner/Spinner';
 
 const PrivateRoutes = ({ children }) => {
     const { loader, user } = useContext(AuthContext)
     const location = useLocation()
 
     if (loader) {
-        return <p className='flex justify-center items-center min-h-screen'><span className="loading loading-infinity loading-lg "></span></p>
+        return <Spinner></Spinner>
     }
 
     if (!user) {

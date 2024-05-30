@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import toast from 'react-hot-toast';
+import Spinner from '../../LoadingSpinner/Spinner';
 
 const AllBuyers = () => {
 
@@ -35,7 +36,7 @@ const AllBuyers = () => {
     }
 
     if (isLoading) {
-        return <p className='flex justify-center items-center min-h-screen'><span className="loading loading-infinity loading-lg "></span></p>
+        return <Spinner></Spinner>
     }
 
     return (

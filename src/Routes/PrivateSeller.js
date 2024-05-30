@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../UserValidation/Context/AuthProvider';
 import useSeller from '../Hooks/useSeller';
 import { Navigate, useLocation } from 'react-router-dom';
+import Spinner from '../LoadingSpinner/Spinner';
 
 const PrivateSeller = ({ children }) => {
 
@@ -10,7 +11,7 @@ const PrivateSeller = ({ children }) => {
     const location = useLocation();
 
     if (loader || sellerLoader) {
-        return <p className='flex justify-center items-center min-h-screen'><span className="loading loading-infinity loading-lg "></span></p>
+        return <Spinner></Spinner>
     }
 
     if (user && isSeller) {
