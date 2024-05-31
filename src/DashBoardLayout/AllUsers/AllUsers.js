@@ -9,7 +9,7 @@ const AllUsers = () => {
     const { data: users = [], isLoading, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users', {
+            const res = await fetch('https://recarnation-react-server.vercel.app/users', {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -20,7 +20,7 @@ const AllUsers = () => {
     })
 
     const deleteUser = (user) => {
-        fetch(`http://localhost:5000/user/${user?._id}`, {
+        fetch(`https://recarnation-react-server.vercel.app/user/${user?._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

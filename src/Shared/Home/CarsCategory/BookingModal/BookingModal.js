@@ -27,7 +27,7 @@ const BookingModal = ({ products, setProducts }) => {
             meetLocation,
             picture
         };
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://recarnation-react-server.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

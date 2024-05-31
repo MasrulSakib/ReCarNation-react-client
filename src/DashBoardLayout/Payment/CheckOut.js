@@ -12,7 +12,7 @@ const CheckOut = ({ bookingsData }) => {
     const [clientSecret, setClientSecret] = useState("");
 
     useEffect(() => {
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://recarnation-react-server.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -80,7 +80,7 @@ const CheckOut = ({ bookingsData }) => {
                 bookingId: _id,
             };
 
-            fetch('http://localhost:5000/payments', {
+            fetch('https://recarnation-react-server.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',

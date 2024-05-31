@@ -26,10 +26,11 @@ const AddProducts = () => {
             location: data.location,
             years_of_use: parseInt(data.years_of_use),
             picture: data.picture,
-            posted_time: data.date
+            posted_time: data.date,
+            description: data.description
         }
 
-        fetch(`http://localhost:5000/cars`, {
+        fetch(`https://recarnation-react-server.vercel.app/cars`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -159,6 +160,13 @@ const AddProducts = () => {
                         </div>
                         <input {...register("date", { required: 'Date is required' })} type="date" defaultValue={formattedDate} readOnly className="input input-bordered input-error w-full" />
                         {errors.date && <p className='text-error' role="alert">{errors.date.message}</p>}
+                    </label>
+                    <label className="form-control w-full grid md:col-span-2 col-span-1">
+                        <div className="label">
+                            <span className="label-text">Description</span>
+                        </div>
+                        <textarea {...register("description", { required: 'description is required' })} placeholder="tell us more about your car" className="textarea textarea-error w-full"></textarea>
+                        {errors.description && <p className='text-error' role="alert">{errors.description.message}</p>}
                     </label>
 
                 </div>

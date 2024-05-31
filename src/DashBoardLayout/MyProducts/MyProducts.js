@@ -11,7 +11,7 @@ const MyProducts = () => {
     const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: ['myproducts', user?.email],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/dashboard/seller/myproducts?email=${user?.email}`, {
+            const res = await axios.get(`https://recarnation-react-server.vercel.app/dashboard/seller/myproducts?email=${user?.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`,
                 }
@@ -21,7 +21,7 @@ const MyProducts = () => {
     });
 
     const deleteProduct = (product) => {
-        fetch(`http://localhost:5000/dashboard/seller/myproducts/${product._id}`, {
+        fetch(`https://recarnation-react-server.vercel.app/dashboard/seller/myproducts/${product._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`,
@@ -37,11 +37,11 @@ const MyProducts = () => {
     };
 
     const advertiseProduct = (product) => {
-        fetch(`http://localhost:5000/dashboard/seller/myproducts/advertise/${product._id}`, {
+        fetch(`https://recarnation-react-server.vercel.app/dashboard/seller/myproducts/advertise/${product._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                // authorization: `bearer ${localStorage.getItem('accessToken')}`,
+                authorization: `bearer ${localStorage.getItem('accessToken')}`,
             },
             body: JSON.stringify({ advertise: true })
         })

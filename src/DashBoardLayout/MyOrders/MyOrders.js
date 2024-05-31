@@ -12,7 +12,7 @@ const MyOrders = () => {
     const { data: bookings = [], isLoading, refetch } = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/bookings?email=${user?.email}`, {
+            const res = await fetch(`https://recarnation-react-server.vercel.app/bookings?email=${user?.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -23,7 +23,7 @@ const MyOrders = () => {
     })
 
     const deleteBooked = (booking) => {
-        fetch(`http://localhost:5000/bookings/${booking._id}`, {
+        fetch(`https://recarnation-react-server.vercel.app/bookings/${booking._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`,

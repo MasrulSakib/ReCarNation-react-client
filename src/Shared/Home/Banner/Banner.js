@@ -3,26 +3,31 @@ import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 import { RxDotFilled } from 'react-icons/rx';
 import './Banner.css'
 import { Link } from 'react-router-dom';
+import benz from '../../../Assets/Banner/Mercedes-Benz.jpg'
+import supra from '../../../Assets/Banner/Supra.jpg'
+import mazda from '../../../Assets/Banner/Mazda.jpg'
+import lamborghini from '../../../Assets/Banner/lamborghini-revuelto-exterior.jpg'
+import mustang from '../../../Assets/Banner/Shelby_Mustang_GT500_Goodwood_001.jpg'
 
 
 
 const Banner = () => {
     const slides = [
         {
-            url: "https://a.d-cd.net/UE6uG2xh_Nz74mc4KmTBQwdfjZY-1920.jpg", title: "Marcedes Benz",
+            url: `${benz}`, title: "Marcedes Benz",
         },
         {
-            url: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Toyota_GR_Supra_SZ-R_%283BA-DB82-ZSRW%29.jpg/1200px-Toyota_GR_Supra_SZ-R_%283BA-DB82-ZSRW%29.jpg", title: "toyota supra",
+            url: `${supra}`, title: "toyota supra",
         },
         {
-            url: "https://upload.wikimedia.org/wikipedia/commons/8/88/Mazda_CX-5_Newground_1X7A6786_%28cropped%29.jpg", title: "Mazda",
+            url: `${mazda}`, title: "Mazda",
         },
 
         {
-            url: "https://cdn.motor1.com/images/mgl/zxQBp4/s1/2024-lamborghini-revuelto-exterior.jpg", title: "lamborghini",
+            url: `${lamborghini}`, title: "lamborghini",
         },
         {
-            url: "https://upload.wikimedia.org/wikipedia/commons/7/7f/Shelby_Mustang_GT500_Goodwood_001.jpg", title: "Mustang",
+            url: `${mustang}`, title: "Mustang",
         },
     ];
 

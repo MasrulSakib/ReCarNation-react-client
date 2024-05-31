@@ -10,7 +10,7 @@ const CarData = ({ carData, setProducts }) => {
     const [isBuyer] = useBuyer(user?.email)
 
     const handleReport = (id) => {
-        fetch(`http://localhost:5000/reportedcars/${id}`, {
+        fetch(`https://recarnation-react-server.vercel.app/reportedcars/${id}`, {
             method: 'PUT',
 
         })
@@ -27,7 +27,7 @@ const CarData = ({ carData, setProducts }) => {
         <div className='lg:container lg:mx-auto mx-4'>
             <div className="card lg:w-[850px] lg:h-[500px] md:card-side bg-error shadow-xl mx-auto">
                 <figure><img className='w-[600px] h-full' src={picture} alt="Album" /></figure>
-                <div className='flex flex-col justify-between text-left'>
+                <div className='flex flex-col justify-between text-left md:w-1/2'>
                     <div className='card-body'>
                         <h2 className="card-title mb-6">{company} {name}</h2>
                         <div>
@@ -49,7 +49,7 @@ const CarData = ({ carData, setProducts }) => {
                             <p>Posted Time: {posted_time}</p>
                         </div>
                     </div>
-                    <div className="card-actions justify-end md:me-2 me-4">
+                    <div className="card-actions justify-end me-4">
                         {
                             isBuyer &&
                             <button onClick={() => handleReport(_id)} className='btn-sm md:btn mb-5 whitespace-nowrap btn btn-neutral rounded-none'>Report</button>

@@ -9,7 +9,7 @@ const ReportedCars = () => {
     const { data: reportedCars = [], isLoading, refetch } = useQuery({
         queryKey: ['post'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/dashboard/reportedcars/post', {
+            const res = await fetch('https://recarnation-react-server.vercel.app/dashboard/reportedcars/post', {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -20,7 +20,7 @@ const ReportedCars = () => {
     })
 
     const deletePost = (reportedCar) => {
-        fetch(`http://localhost:5000/dashboard/reportedcars/post/${reportedCar._id}`, {
+        fetch(`https://recarnation-react-server.vercel.app/dashboard/reportedcars/post/${reportedCar._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

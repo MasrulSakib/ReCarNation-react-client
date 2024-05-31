@@ -38,7 +38,7 @@ export const router = createBrowserRouter([
             {
                 path: '/categorizedcars/:company',
                 element: <PrivateRoutes><CategorizedCars></CategorizedCars></PrivateRoutes>,
-                loader: ({ params }) => fetch(`http://localhost:5000/cars/${params.company}`)
+                loader: ({ params }) => fetch(`https://recarnation-react-server.vercel.app/cars/${params.company}`)
             },
         ]
     },
@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/bookings/:id',
                 element: <Payment></Payment>,
-                loader: ({ params }) => fetch(`http://localhost:5000/dashboard/bookings/${params.id}`)
+                loader: ({ params }) => fetch(`https://recarnation-react-server.vercel.app/dashboard/bookings/${params.id}`)
             },
             {
                 path: '/dashboard/allusers',

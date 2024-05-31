@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import backgroundImg from '../../Assets/BG/Login.jpg'
+import backgroundImg from '../../Assets/BG/Login.jpg';
 import { AuthContext } from '../Context/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import GoogleLogin from '../SocialLogin/GoogleLogin';
@@ -8,60 +8,49 @@ import toast from 'react-hot-toast';
 import Navbar from '../../Shared/Navbar/Navbar';
 import useToken from '../../Hooks/useToken';
 
-
 const Login = () => {
-
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { userSignIn } = useContext(AuthContext)
+    const { userSignIn } = useContext(AuthContext);
     const [error, setError] = useState('');
-
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location?.state?.from?.pathname || '/'
+    const from = location.state?.from?.pathname || '/';
+    const [userLoginEmail, setUserLoginEmail] = useState('');
+    const [token, loading, tokenError] = useToken(userLoginEmail);
 
-    const [userLoginEmail, setUserLoginEmail] = useState('')
-    const [token] = useToken(userLoginEmail);
-
-    if (token) {
-        navigate(from, { replace: true })
-        toast.success('User Login Successful')
-
-    }
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true });
+            toast.success('User Login Successful');
+        }
+    }, [token, from, navigate]);
 
     const handleLogin = data => {
-        console.log(data)
-        setError('')
+        setError('');
         userSignIn(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 console.log(user)
-                setUserLoginEmail(data?.email)
-
+                setUserLoginEmail(data?.email);
             })
             .catch(error => {
-                console.error(error)
-                setError(error.message)
-                toast.error(error.message)
-            })
-
-
-    }
+                setError(error.message);
+                toast.error(error.message);
+            });
+    };
 
     return (
         <section>
-            <Navbar></Navbar>
+            <Navbar />
             <div
                 className='min-h-screen flex items-center justify-center relative'
-
-                style={
-                    {
-                        background: `url(${backgroundImg})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        backgroundRepeat: 'no-repeat',
-                    }
-                }>
-
+                style={{
+                    background: `url(${backgroundImg})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                }}
+            >
                 <form className='w-72 md:w-96 grid grid-cols-1 gap-3 border border-error bg-base-300 shadow-lg p-4 md:p-6 relative z-10 m-4'
                     onSubmit={handleSubmit(handleLogin)}>
                     <h2 className='text-3xl text-center'>LOGIN</h2>
@@ -69,9 +58,7 @@ const Login = () => {
                         <div className="label">
                             <span className="label-text">User Name</span>
                         </div>
-                        <input {...register("username",
-                            { required: "User name is required" }
-                        )}
+                        <input {...register("username", { required: "User name is required" })}
                             type="text" placeholder="username"
                             className="input input-bordered input-error w-full" />
                         {errors.username && <p className='text-error' role="alert">{errors.username.message}</p>}
@@ -93,23 +80,22 @@ const Login = () => {
                         </div>
                         <input {...register("password", {
                             required: "Password is required",
-                            minLength: { value: 6, message: 'Password must be 6 charecters or longer' },
-
+                            minLength: { value: 6, message: 'Password must be 6 characters or longer' },
                         })}
                             type="password" placeholder="Your Password"
                             className="input input-bordered input-error w-full" />
                         {errors.password && <p className='text-error' role="alert">{errors.password.message}</p>}
                     </label>
-                    <button type='submit' className='btn btn-error'>LOGIN</button>
+                    <button type='submit' className='btn btn-error'>
+                        {loading ? 'Loading...' : 'LOGIN'}
+                    </button>
                     <p className='text-red-600 text-center'>
-                        {
-                            error &&
-                            <span>{error}</span>
-                        }
+                        {error && <span>{error}</span>}
+                        {tokenError && <span>{tokenError}</span>}
                     </p>
                     <p className='text-center'>New to ReCarNation? <Link to='/signup' className='text-error font-semibold'>Create New Account</Link></p>
                     <div className="divider divider-error text-error mb-4">OR</div>
-                    <GoogleLogin></GoogleLogin>
+                    <GoogleLogin />
                 </form>
             </div>
         </section>

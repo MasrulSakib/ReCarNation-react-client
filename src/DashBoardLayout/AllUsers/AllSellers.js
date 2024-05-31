@@ -8,7 +8,7 @@ const AllSellers = () => {
     const { data: users = [], isLoading, refetch } = useQuery({
         queryKey: ['sellers'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users/sellers', {
+            const res = await fetch('https://recarnation-react-server.vercel.app/users/sellers', {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -21,7 +21,7 @@ const AllSellers = () => {
 
     const handleUserStatus = async (user) => {
         try {
-            const res = await fetch(`http://localhost:5000/users/status/${user?.email}`, {
+            const res = await fetch(`https://recarnation-react-server.vercel.app/users/status/${user?.email}`, {
                 method: 'PUT',
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -38,7 +38,7 @@ const AllSellers = () => {
     };
 
     const deleteUser = (user) => {
-        fetch(`http://localhost:5000/user/${user?._id}`, {
+        fetch(`https://recarnation-react-server.vercel.app/user/${user?._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
