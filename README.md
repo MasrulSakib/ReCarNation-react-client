@@ -3,9 +3,9 @@
 ReCarNation is a car resale website where users can buy and sell cars. The platform supports three types of users: Admin, Buyer, and Seller. This repository contains the codebase for the frontend and ReCarNation-react-server for backend of the ReCarNation website.
 
 # Admin Login
--username: Admin
--admin email: Admin@admin.com
--admin Password: Admin222@@
+- username: Admin
+- admin email: Admin@admin.com
+- admin Password: Admin222@@
 
 ## Table of Contents
 - [Features](#features)
