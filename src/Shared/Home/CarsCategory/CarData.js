@@ -24,13 +24,13 @@ const CarData = ({ carData, setProducts }) => {
     }
 
     return (
-        <div className='lg:container lg:mx-auto mx-4'>
-            <div className="card lg:w-[850px] lg:h-[500px] md:card-side bg-error shadow-xl mx-auto">
-                <figure><img className='w-[600px] h-full' src={picture} alt="Album" /></figure>
-                <div className='flex flex-col justify-between text-left md:w-1/2'>
+        <div className=''>
+            <div className="card md:card-side bg-error shadow-xl mx-auto">
+                <figure className=' md:w-3/4 md:h-[400px]'><img className='h-full' src={picture} alt="Album" /></figure>
+                <div className='flex flex-col justify-between text-left xl:w-2/5'>
                     <div className='card-body'>
                         <h2 className="card-title mb-6">{company} {name}</h2>
-                        <div>
+                        <div className='md:text-sm lg:text-base'>
                             {
                                 carData.status === "verified" &&
                                 <p className='flex items-center whitespace-nowrap'>

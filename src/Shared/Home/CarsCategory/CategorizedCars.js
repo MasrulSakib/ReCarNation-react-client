@@ -11,7 +11,7 @@ const CategorizedCars = () => {
     return (
         <div>
             <h2 className='md:text-3xl text-2xl font-semibold mt-20 text-error'>Total Cars Available in this Category: {carsData.length}</h2>
-            <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 my-20 mx-auto' >
+            <div className='grid grid-cols-1 xl:grid-cols-2 gap-6 my-20  mx-4' >
                 {
                     carsData.map(carData => <CarData
                         key={carData._id}
