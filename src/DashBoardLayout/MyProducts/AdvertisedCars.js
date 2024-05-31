@@ -19,14 +19,14 @@ const AdvertisedCars = () => {
 
     return (
 
-
-        < div className="grid grid-cols-1 gap-10 md:container md:mx-auto mx-4" >
-            {
-                advertisedCars.map(car => (
-                    <>
-                        <h2 className='text-3xl mt-20 font-semibold text-error'>Advertised Cars</h2>
+        advertisedCars.length > 0 &&
+        <div>
+            <h2 className='text-3xl mt-20 mb-10 font-semibold text-error'>Advertised Cars</h2>
+            < div className="grid grid-cols-1 gap-10 md:container md:mx-auto mx-4" >
+                {
+                    advertisedCars.map(car => (
                         <div key={car._id} className="card lg:card-side bg-error shadow-xl ">
-                            <figure><img className='md:h-full md:w-full' src={car.picture} alt="Album" /></figure>
+                            <figure className='lg:w-1/2 lg:h-full'><img src={car.picture} alt="Album" /></figure>
                             <div className="card-body lg:w-1/2">
                                 <h2 className="card-title text-2xl">{car.company} {car.name}</h2>
                                 <div className="divider divider-neutral"></div>
@@ -39,13 +39,11 @@ const AdvertisedCars = () => {
                                         <button className="btn-sm md:btn-md btn-outline btn-ghost rounded-none">See More</button></Link>
                                 </div>
                             </div>
-
                         </div>
-                    </>
-
-                ))
-            }
-        </div >
+                    ))
+                }
+            </div >
+        </div>
     );
 };
 
