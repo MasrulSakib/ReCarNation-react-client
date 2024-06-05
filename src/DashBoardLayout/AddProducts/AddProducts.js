@@ -18,7 +18,7 @@ const AddProducts = () => {
             seller_name: data.seller_name,
             email: data.email,
             company: data.company,
-            name: data.name,
+            model: data.model,
             original_price: parseInt(data.original_price),
             resale_price: parseInt(data.resale_price),
             condition: data.condition,
@@ -43,7 +43,7 @@ const AddProducts = () => {
             .then(res => res.json())
             .then(result => {
                 console.log(result);
-                toast.success(`${data.company} ${data.name} is successfully added`)
+                toast.success(`${data.company} ${data.model} is successfully added`)
                 navigate('/dashboard/myproducts')
             })
     }
@@ -92,8 +92,8 @@ const AddProducts = () => {
                         <div className="label">
                             <span className="label-text">Model</span>
                         </div>
-                        <input {...register("name", { required: 'Model is required' })} type="text" placeholder="Car's model" className="input input-bordered input-error w-full" />
-                        {errors.name && <p className='text-error' role="alert">{errors.name.message}</p>}
+                        <input {...register("model", { required: 'Model is required' })} type="text" placeholder="Car's model" className="input input-bordered input-error w-full" />
+                        {errors.model && <p className='text-error' role="alert">{errors.model.message}</p>}
                     </label>
 
                     <label className="form-control w-full">

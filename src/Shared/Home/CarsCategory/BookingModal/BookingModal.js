@@ -4,14 +4,14 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 const BookingModal = ({ products, setProducts }) => {
-    const { name, resale_price, picture } = products;
+    const { model, resale_price, picture } = products;
     const { user } = useContext(AuthContext)
     const { register, handleSubmit } = useForm();
 
     const handleBooked = data => {
         data.name = user?.displayName;
         data.email = user?.email;
-        data.model = name;
+        data.model = model;
         data.selling_price = resale_price;
         console.log(data)
         storeBookedData(data.name, data.email, data.model, data.selling_price, data.phone, data.meet_location, picture)
@@ -76,7 +76,7 @@ const BookingModal = ({ products, setProducts }) => {
                             <div className="label">
                                 <span className="label-text">Model</span>
                             </div>
-                            <input {...register("model")} disabled type="text" placeholder="location" value={name} className="input input-bordered input-error w-full" />
+                            <input {...register("model")} disabled type="text" placeholder="location" value={model} className="input input-bordered input-error w-full" />
                         </label>
 
                         <label className="form-control w-full">

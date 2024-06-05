@@ -31,7 +31,7 @@ const ReportedCars = () => {
                 console.log(data)
                 if (data.deletedCount > 0) {
                     refetch();
-                    toast.success(`${reportedCar?.company} ${reportedCar?.name} is removed successfully`);
+                    toast.success(`${reportedCar?.company} ${reportedCar?.model} is removed successfully`);
                 }
             })
     }
@@ -77,7 +77,7 @@ const ReportedCars = () => {
                                             </div>
                                         </div>
                                     </td>
-                                    <td>{reportedCar.company} {reportedCar.name}</td>
+                                    <td>{reportedCar.company} {reportedCar.model}</td>
                                     <td><p>${reportedCar.resale_price}</p></td>
                                     <td>{status}</td>
                                 </tr>

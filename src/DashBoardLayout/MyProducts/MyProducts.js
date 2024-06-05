@@ -31,7 +31,7 @@ const MyProducts = () => {
             .then(data => {
                 if (data.deletedCount > 0) {
                     refetch();
-                    toast.success(`${product.company} ${product.name} is removed successfully`);
+                    toast.success(`${product.company} ${product.model} is removed successfully`);
                 }
             });
     };
@@ -49,7 +49,7 @@ const MyProducts = () => {
             .then(data => {
                 if (data.modifiedCount > 0) {
                     refetch();
-                    toast.success(`${product.company} ${product.name} is now advertised`);
+                    toast.success(`${product.company} ${product.model} is now advertised`);
                 }
             });
     };
@@ -77,7 +77,7 @@ const MyProducts = () => {
                     </thead>
                     <tbody>
                         {products.map((product, i) => {
-                            const status = product.booked ? (product.paid ? 'Sold' : 'Available') : 'Available';
+                            const status = product.paid ? 'Sold' : 'Available';
 
                             return (
                                 <tr key={product._id}>
@@ -96,13 +96,17 @@ const MyProducts = () => {
                                             </div>
                                         </div>
                                     </td>
-                                    <td>{product.company} {product.name}</td>
+                                    <td>{product.company} {product.model}</td>
                                     <td><p>${product.resale_price}</p></td>
                                     <td>{status}</td>
                                     <td>
                                         {
                                             status === "Available" &&
                                             <button onClick={() => advertiseProduct(product)} className='btn-sm btn btn-outline'>Advertise</button>
+                                        }
+                                        {
+                                            status === "Sold" &&
+                                            <button disabled onClick={() => advertiseProduct(product)} className='btn-sm btn btn-outline'>Advertise</button>
                                         }
                                     </td>
                                 </tr>

@@ -3,7 +3,7 @@ import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import { FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
 
 const CheckOut = ({ bookingsData }) => {
-    const { sellingPrice, name, email, _id } = bookingsData;
+    const { sellingPrice, name, email, _id, model } = bookingsData;
 
     const [cardError, setCardError] = useState('');
     const [cardSuccess, setCardSuccess] = useState('');
@@ -78,6 +78,7 @@ const CheckOut = ({ bookingsData }) => {
                 email,
                 transactionId: paymentIntent.id,
                 bookingId: _id,
+                model: model
             };
 
             fetch('https://recarnation-react-server.vercel.app/payments', {
