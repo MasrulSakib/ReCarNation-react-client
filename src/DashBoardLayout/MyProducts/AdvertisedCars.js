@@ -25,8 +25,8 @@ const AdvertisedCars = () => {
             < div className="grid grid-cols-1 gap-10 md:container md:mx-auto mx-4" >
                 {
                     advertisedCars.map(car => (
-                        <div key={car._id} className="card lg:card-side bg-error shadow-xl ">
-                            <figure className='lg:w-1/2 lg:h-full'><img src={car.picture} alt="Album" /></figure>
+                        <div key={car._id} className="card lg:card-side bg-error shadow-xl md:mx-4">
+                            <figure className='lg:w-1/2 lg:h-full'><img className='h-full w-full' src={car.picture} alt="Album" /></figure>
                             <div className="card-body lg:w-1/2">
                                 <h2 className="card-title text-2xl">{car.company} {car.name}</h2>
                                 <div className="divider divider-neutral"></div>
